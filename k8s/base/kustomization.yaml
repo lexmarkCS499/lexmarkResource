@@ -1,0 +1,6 @@
+# k8s/base/kustomization.yaml
+resources:
+  - deployment.yaml
+  - service.yaml
+  - namespace.yaml
+

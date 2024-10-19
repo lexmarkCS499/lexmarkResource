@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dev-my-app-ingress
+  namespace: dev  # Ensure this is set to the correct namespace
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /  # Rewrite paths to root
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"  # Disable HTTPS redirect
+    nginx.ingress.kubernetes.io/use-regex: "true"  # Allow regex in paths
+spec:
+  rules:
+    - host: dev.myapp.local  # Hostname for your dev environment
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: dev-my-app  # Ensure this matches the name of your service
+                port:
+                  number: 80
+

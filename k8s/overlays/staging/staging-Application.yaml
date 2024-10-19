@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: staging-myapp-argo-application
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/lexmarkCS499/lexmark.git
+    targetRevision: HEAD
+    path: 'k8s/overlays/staging'  # Use the staging overlay
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: staging  # Namespace for the staging environment
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true  # Create staging namespace if it doesn't exist
