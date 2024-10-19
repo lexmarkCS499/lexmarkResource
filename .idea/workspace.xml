@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2e4b5307-1eae-4045-ae62-9f8bdcb713e2" name="Changes" comment="" />
+    <list default="true" id="2e4b5307-1eae-4045-ae62-9f8bdcb713e2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,7 +66,7 @@
       <window_info id="Commit_Guest" />
       <window_info id="Pull Requests" />
       <window_info id="Learn" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23892857" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23919874" />
       <window_info id="Commit" order="1" weight="0.25" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" />
@@ -72,10 +74,10 @@
       <window_info anchor="bottom" id="Profiler" />
       <window_info anchor="bottom" id="TODO" />
       <window_info anchor="bottom" id="File Transfer" />
-      <window_info anchor="bottom" id="Find" weight="0.48355603" />
+      <window_info anchor="bottom" id="Find" show_stripe_button="false" weight="0.4835" />
       <window_info anchor="bottom" id="Version Control" order="0" weight="0.4075" />
       <window_info anchor="bottom" id="Problems View" order="1" weight="0.38159204" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="2" visible="true" weight="0.5655" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="2" visible="true" weight="0.32985073" />
       <window_info anchor="bottom" id="Services" order="3" weight="0.4075" />
       <window_info anchor="right" id="Endpoints" />
       <window_info anchor="right" id="Meet New UI" side_tool="true" />
@@ -104,7 +106,7 @@
       <updated>1728523554618</updated>
       <workItem from="1728523557122" duration="29706000" />
       <workItem from="1728926808561" duration="7533000" />
-      <workItem from="1728935225746" duration="64120000" />
+      <workItem from="1728935225746" duration="66106000" />
     </task>
     <servers />
   </component>
