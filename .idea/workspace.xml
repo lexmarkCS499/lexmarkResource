@@ -36,13 +36,16 @@
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="2nE1jEUUVaezXIW6hvoFr2TJmuf" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
@@ -106,7 +109,7 @@
       <updated>1728523554618</updated>
       <workItem from="1728523557122" duration="29706000" />
       <workItem from="1728926808561" duration="7533000" />
-      <workItem from="1728935225746" duration="66794000" />
+      <workItem from="1728935225746" duration="67400000" />
     </task>
     <servers />
   </component>
@@ -125,6 +128,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
