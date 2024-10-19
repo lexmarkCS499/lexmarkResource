@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2e4b5307-1eae-4045-ae62-9f8bdcb713e2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/argocd-linux-amd64" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +78,7 @@
       <window_info anchor="bottom" id="Find" weight="0.48355603" />
       <window_info anchor="bottom" id="Version Control" order="0" weight="0.4075" />
       <window_info anchor="bottom" id="Problems View" order="1" weight="0.38159204" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="2" visible="true" weight="0.4075" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="2" visible="true" weight="0.5655" />
       <window_info anchor="bottom" id="Services" order="3" weight="0.4075" />
       <window_info anchor="right" id="Endpoints" />
       <window_info anchor="right" id="Meet New UI" side_tool="true" />
@@ -106,7 +107,7 @@
       <updated>1728523554618</updated>
       <workItem from="1728523557122" duration="29706000" />
       <workItem from="1728926808561" duration="7533000" />
-      <workItem from="1728935225746" duration="62064000" />
+      <workItem from="1728935225746" duration="63728000" />
     </task>
     <servers />
   </component>
