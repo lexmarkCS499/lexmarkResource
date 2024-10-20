@@ -6,6 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="2e4b5307-1eae-4045-ae62-9f8bdcb713e2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s/overlays/dev/dev-app.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/overlays/dev/dev-app.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s/overlays/dev/ingress.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/overlays/dev/ingress.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s/overlays/prod/ingress.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/overlays/prod/ingress.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s/overlays/staging/ingress.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/overlays/staging/ingress.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +53,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "prod",
+    "git-widget-placeholder": "dev",
     "jdk.selected.JAVA_MODULE": "11",
     "last_opened_file_path": "/home/kamal/Lexmark",
     "node.js.detected.package.eslint": "true",
@@ -80,7 +84,7 @@
       <window_info anchor="bottom" id="Find" show_stripe_button="false" weight="0.4835" />
       <window_info anchor="bottom" id="Version Control" order="0" weight="0.4075" />
       <window_info anchor="bottom" id="Problems View" order="1" weight="0.38159204" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="2" visible="true" weight="0.32985073" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="2" visible="true" weight="0.35314685" />
       <window_info anchor="bottom" id="Services" order="3" weight="0.4075" />
       <window_info anchor="right" id="Endpoints" />
       <window_info anchor="right" id="Meet New UI" side_tool="true" />

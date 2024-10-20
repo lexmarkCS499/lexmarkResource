@@ -8,8 +8,8 @@ spec:
 
   # Source configuration: Where to pull the application manifests from
   source:
-    repoURL: https://github.com/lexmarkCS499/lexmark.git
-    targetRevision: HEAD
+    repoURL: https://github.com/lexmarkCS499/lexmarkResource.git
+    targetRevision: dev
     path: 'k8s/overlays/dev'  # Use the dev overlay for this environment
 
   # Destination configuration: Where to deploy the application in Kubernetes
@@ -20,7 +20,7 @@ spec:
   # Sync policy: Automate sync and healing
   syncPolicy:
     automated:
-      #selfHeal: true
-      #prune: true
+      selfHeal: true
+      prune: true
     syncOptions:
       - CreateNamespace=true  # Create the dev namespace if it doesn't exist

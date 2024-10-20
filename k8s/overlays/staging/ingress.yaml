@@ -1,11 +1,15 @@
-# k8s/overlays/staging/ingress.yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: staging-my-app-ingress
+  namespace: staging
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
-    - host: staging.myapp.local
+    - host: staging.myapp.local  # Hostname for your staging environment
       http:
         paths:
           - path: /
@@ -15,4 +19,3 @@ spec:
                 name: staging-my-app
                 port:
                   number: 80
-
