@@ -1,5 +1,5 @@
-name: Build, Push Docker Image, and Deploy to Minikube
-# This workflow will run on pushes to the dev, staging, and prod branches
+name: Build, Push Docker Image, and Deploy
+
 on:
   push:
     branches:
@@ -20,40 +20,35 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      # Step 3: Set up Minikube Docker environment
-      - name: Set up Minikube Docker
+      # Step 3: Log in to DockerHub
+      - name: Log in to DockerHub
         run: |
-          eval $(minikube docker-env)  # This ensures that Docker commands use the Minikube Docker daemon
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "lexmarkkubernetes" --password-stdin
 
-      # Step 4: Build the Docker image (locally in Minikube)
-      - name: Build Docker image
+      # Step 4: Build and push the Docker image to DockerHub
+      - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
           context: .
-          push: false  # No need to push to DockerHub since we're building locally
-          tags: my-app:${{ github.ref_name }}
+          push: true
+          tags: lexmarkkubernetes/my-app:${{ github.ref_name }}
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
-      # Step 5: Checkout the repository again
+      # Step 1: Checkout the repository again
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Step 6: Set up kubectl for interacting with the Minikube Kubernetes cluster
+      # Step 2: Set up kubectl to interact with Kubernetes cluster
       - name: Set up kubectl
         uses: azure/setup-kubectl@v1
         with:
           version: 'latest'
 
-      # Step 7: Log in to ArgoCD
-      - name: Log in to ArgoCD
-        run: |
-          argocd login $(minikube ip):8080 --username admin --password ${{ secrets.ARGOCD_PASSWORD }} --insecure
-
-      # Step 8: Sync the ArgoCD application to deploy the updated image to Minikube
+      # Step 3: Sync ArgoCD to deploy the updated image
       - name: Sync ArgoCD Application
         run: |
           argocd app sync dev-myapp-argo-application --prune
