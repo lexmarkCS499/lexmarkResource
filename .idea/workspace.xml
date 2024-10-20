@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e4b5307-1eae-4045-ae62-9f8bdcb713e2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.github/workflows/build.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/k8s/overlays/staging/deployment.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/overlays/dev/dev-app.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/overlays/dev/dev-app.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/overlays/dev/ingress.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/overlays/dev/ingress.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/overlays/prod/ingress.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/overlays/prod/ingress.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/overlays/staging/ingress.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/overlays/staging/ingress.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s/overlays/dev/deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/overlays/dev/deployment.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

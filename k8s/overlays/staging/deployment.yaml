@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: my-container
-          image: my-app:dev
+          image: my-app:staging  # Staging-specific image
