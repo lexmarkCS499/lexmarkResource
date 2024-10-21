@@ -6,15 +6,13 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/lexmarkCS499/lexmark.git
-    targetRevision: HEAD
+    repoURL: https://github.com/lexmarkCS499/lexmarkResource.git
+    targetRevision: prod
     path: 'k8s/overlays/prod'  # Use the prod overlay
   destination:
     server: https://kubernetes.default.svc
     namespace: prod  # Namespace for the prod environment
   syncPolicy:
-    automated:
-      selfHeal: true
-      prune: true
+    automated: {}
     syncOptions:
       - CreateNamespace=true  # Create prod namespace if it doesn't exist

@@ -23,7 +23,7 @@ jobs:
       # Step 3: Log in to DockerHub
       - name: Log in to DockerHub
         run: |
-          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "lexmarkkubernetes" --password-stdin
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       # Step 4: Build and push the Docker image to DockerHub
       - name: Build and push Docker image
@@ -51,6 +51,10 @@ jobs:
       # Step 3: Sync ArgoCD to deploy the updated image
       - name: Sync ArgoCD Application
         run: |
-          argocd app sync dev-myapp-argo-application --prune
-          argocd app sync staging-myapp-argo-application --prune
-          argocd app sync prod-myapp-argo-application --prune
+          if [ "${{ github.ref_name }}" == "dev" ]; then
+            argocd app sync dev-myapp-argo-application --prune
+          elif [ "${{ github.ref_name }}" == "staging" ]; then
+            argocd app sync staging-myapp-argo-application --prune
+          elif [ "${{ github.ref_name }}" == "prod" ]; then
+            argocd app sync prod-myapp-argo-application --prune
+          fi

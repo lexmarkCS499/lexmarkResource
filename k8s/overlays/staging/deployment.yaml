@@ -13,5 +13,7 @@ spec:
         app: my-app
     spec:
       containers:
-        - name: my-container
-          image: my-app:staging  # Staging-specific image
+        - name: my-app
+          image: lexmarkkubernetes/my-app:staging  # Use the correct tag for the dev environment
+          ports:
+            - containerPort: 8080
