@@ -24,3 +24,7 @@ spec:
       prune: true
     syncOptions:
       - CreateNamespace=true  # Create the dev namespace if it doesn't exist
+    annotations:
+      argocd-image-updater.argoproj.io/image-list: lexmarkkubernetes/my-app
+      argocd-image-updater.argoproj.io/refresh: always
+      argocd-image-updater.argoproj.io/lexmarkkubernetes/my-app.tag: "dev"
