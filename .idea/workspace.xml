@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87f3aad9-30a6-4287-b5a2-6201fb8d17f3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,7 +70,7 @@
       <window_info anchor="bottom" id="Run" />
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="Problems View" order="2" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="3" visible="true" weight="0.33016986" />
+      <window_info anchor="bottom" id="Terminal" order="3" weight="0.33016986" />
       <window_info anchor="bottom" id="Services" order="4" weight="0.33016986" />
       <window_info anchor="right" id="Endpoints" />
       <window_info anchor="right" id="Meet New UI" side_tool="true" />
@@ -106,7 +107,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1729465498418</updated>
-      <workItem from="1729465501214" duration="10263000" />
+      <workItem from="1729465501214" duration="11165000" />
     </task>
     <servers />
   </component>
