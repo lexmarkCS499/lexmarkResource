@@ -9,4 +9,5 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 8080  # Ensure the targetPort matches the containerPort in `deployment.yaml`
+  type: NodePort
 

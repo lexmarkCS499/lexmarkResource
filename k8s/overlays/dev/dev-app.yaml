@@ -23,8 +23,10 @@ spec:
       selfHeal: true
       prune: true
     syncOptions:
-      - CreateNamespace=true  # Create the dev namespace if it doesn't exist
+      - CreateNamespace = true
     annotations:
       argocd-image-updater.argoproj.io/image-list: lexmarkkubernetes/my-app
       argocd-image-updater.argoproj.io/refresh: always
       argocd-image-updater.argoproj.io/lexmarkkubernetes/my-app.tag: "dev"
+      argocd-image-updater.argoproj.io/write-back-method: git
+
