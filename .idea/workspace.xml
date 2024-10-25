@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87f3aad9-30a6-4287-b5a2-6201fb8d17f3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/build.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/base/service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/base/service.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/overlays/dev/deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/overlays/dev/deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/overlays/dev/dev-app.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/overlays/dev/dev-app.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +60,7 @@
       <window_info id="Commit_Guest" />
       <window_info id="Pull Requests" />
       <window_info id="Learn" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21692307" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20394737" />
       <window_info id="Commit" order="1" weight="0.25" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" />
@@ -73,7 +71,7 @@
       <window_info anchor="bottom" id="Run" />
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="Problems View" order="2" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="3" visible="true" weight="0.3439126" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="3" visible="true" weight="0.19094694" />
       <window_info anchor="bottom" id="Services" order="4" weight="0.33016986" />
       <window_info anchor="right" id="Endpoints" />
       <window_info anchor="right" id="Meet New UI" side_tool="true" />
@@ -115,7 +113,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1729465498418</updated>
-      <workItem from="1729465501214" duration="18185000" />
+      <workItem from="1729465501214" duration="21112000" />
     </task>
     <servers />
   </component>
