@@ -1,6 +1,8 @@
 minikube-linux-amd64
 argocd-linux-amd64
-actions-runner/
 .idea/workspace.xml
+.idea/vcs.xml
+
+
 
 

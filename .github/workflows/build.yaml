@@ -34,3 +34,41 @@ jobs:
           push: true
           tags: lexmarkkubernetes/my-app:${{ github.ref_name }}
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository again
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Locate ArgoCD binary
+        run: which argocd
+
+      # Verify ArgoCD Installation
+      - name: Verify ArgoCD Installation
+        run: argocd version
+
+      #Step 2: ArgoCd Login
+      - name: ArgoCD Login and sync
+        env:
+          ARGOCD_SERVER: http://localhost:8080
+          ARGOCD_AUTH_TOKEN: ${{ secrets.ARGOCD_AUTH_TOKEN }}
+        run: |
+          # Set up authentication with environment variables
+          export ARGOCD_OPTS="--server $ARGOCD_SERVER --auth-token $ARGOCD_AUTH_TOKEN"
+          # Optionally, verify the connection
+          argocd account get-user-info
+
+
+      # Step 2: Sync ArgoCD to deploy the updated image
+      - name: Sync ArgoCD Application
+        run: |
+          if [ "${{ github.ref_name }}" == "dev" ]; then
+            argocd app sync dev-myapp-argo-application --prune
+          elif [ "${{ github.ref_name }}" == "staging" ]; then
+            argocd app sync staging-myapp-argo-application --prune
+          elif [ "${{ github.ref_name }}" == "prod" ]; then
+            argocd app sync prod-myapp-argo-application --prune
+          fi
