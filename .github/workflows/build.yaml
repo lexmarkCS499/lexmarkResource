@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       # Step 1: Checkout the code from the repository
@@ -36,7 +36,7 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       # Step 1: Checkout the repository again
@@ -47,10 +47,13 @@ jobs:
       - name: Add ArgoCD to PATH
         run: |
           echo "/usr/local/bin/argocd" >> $GITHUB_PATH  # Replace with the correct path if different
-      
+
+      # Verify ArgoCD Installation
+      - name: Verify ArgoCD Installation
+        run: argocd version
 
       #Step 2: ArgoCd Login
-      - name: ArgoCD Login
+      - name: ArgoCD Login and sync
         env:
           ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
           ARGOCD_AUTH_TOKEN: ${{ secrets.ARGOCD_AUTH_TOKEN }}
