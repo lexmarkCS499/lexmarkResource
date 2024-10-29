@@ -39,19 +39,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository again
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Step 2: Download and Install ArgoCD CLI in Working Directory
+      - name: Download and Install ArgoCD CLI in Working Directory
         run: |
           curl -sSL -o ./argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
           chmod +x ./argocd
 
-      #Step 3: ArgoCd Login
-      - name: ArgoCD Login and sync
+      # Step 3: ArgoCD Login using Local Binary
+      - name: ArgoCD Login and Sync
         env:
-          ARGOCD_SERVER: https://<random-id>.ngrok.io
+          ARGOCD_SERVER: https://<random-id>.ngrok.io  # Replace with the ngrok URL
           ARGOCD_AUTH_TOKEN: ${{ secrets.ARGOCD_AUTH_TOKEN }}
         run: |
           # Use the local binary to verify ArgoCD CLI is working
@@ -60,10 +59,8 @@ jobs:
           # Login and verify the connection
           export ARGOCD_OPTS="--server $ARGOCD_SERVER --auth-token $ARGOCD_AUTH_TOKEN"
           ./argocd account get-user-info
-          
 
-
-      # Step 4: Sync ArgoCD to deploy the updated image
+      # Step 4: Sync ArgoCD Application using Local Binary
       - name: Sync ArgoCD Application
         run: |
           if [ "${{ github.ref_name }}" == "dev" ]; then
