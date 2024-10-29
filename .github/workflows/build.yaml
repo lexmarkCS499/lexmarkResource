@@ -43,28 +43,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-
-      - name: Locate ArgoCD binary
-        run: |
-          # Check common installation paths
-          which argocd || echo "ArgoCD not found in PATH"
-          # Alternative locations
-          if [ -f "/usr/local/bin/argocd" ]; then
-          export PATH=$PATH:/usr/local/bin
-          elif [ -f "/usr/bin/argocd" ]; then
-          export PATH=$PATH:/usr/bin
-          elif [ -f "$HOME/lexmarkResource/argocd" ]; then
-          export PATH=$PATH:$HOME/lexmarkResource
-          else
-          echo "ArgoCD binary not found. Please ensure it's installed."
-          exit 1
-          fi
-          
-
-      # Verify ArgoCD Installation
-      - name: Verify ArgoCD Installation
-        run: argocd version
-
       #Step 2: ArgoCd Login
       - name: ArgoCD Login and sync
         env:
