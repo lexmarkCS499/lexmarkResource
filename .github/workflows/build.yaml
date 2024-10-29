@@ -44,7 +44,6 @@ jobs:
         uses: actions/checkout@v2
 
       # Step 2: Download and Install ArgoCD CLI in Working Directory
-      - name: Install ArgoCD CLI
         run: |
           curl -sSL -o ./argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
           chmod +x ./argocd
@@ -52,7 +51,7 @@ jobs:
       #Step 3: ArgoCd Login
       - name: ArgoCD Login and sync
         env:
-          ARGOCD_SERVER: localhost:8080
+          ARGOCD_SERVER: https://<random-id>.ngrok.io
           ARGOCD_AUTH_TOKEN: ${{ secrets.ARGOCD_AUTH_TOKEN }}
         run: |
           # Use the local binary to verify ArgoCD CLI is working
