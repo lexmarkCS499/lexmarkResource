@@ -46,7 +46,7 @@ jobs:
       #Step 2: ArgoCd Login
       - name: ArgoCD Login and sync
         env:
-          ARGOCD_SERVER: https://<random-id>.ngrok.io
+          ARGOCD_SERVER: http://127.0.0.1:4040
           ARGOCD_AUTH_TOKEN: ${{ secrets.ARGOCD_AUTH_TOKEN }}
         run: |
           # Set up authentication with environment variables
