@@ -50,7 +50,7 @@ jobs:
       # Step 3: ArgoCD Login using Local Binary
       - name: ArgoCD Login and Sync
         env:
-          ARGOCD_SERVER: "abc6-2603-6010-3000-2a06-00-2.ngrok-free.app"   # Replace with the ngrok URL
+          ARGOCD_SERVER: "2603:6010:3000:2a06::2"   # Replace with the ngrok URL
           ARGOCD_AUTH_TOKEN: ${{ secrets.ARGOCD_AUTH_TOKEN }}
         run: |
           # Use the local binary to verify ArgoCD CLI is working
