@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       # Step 1: Checkout the code from the repository
@@ -55,7 +55,7 @@ jobs:
       #Step 2: ArgoCd Login
       - name: ArgoCD Login and sync
         env:
-          ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
+          ARGOCD_SERVER: http://localhost:8080
           ARGOCD_AUTH_TOKEN: ${{ secrets.ARGOCD_AUTH_TOKEN }}
         run: |
           # Set up authentication with environment variables
