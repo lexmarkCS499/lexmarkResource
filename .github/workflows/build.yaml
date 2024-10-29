@@ -42,9 +42,18 @@ jobs:
       # Step 1: Checkout the repository again
       - name: Checkout repository
         uses: actions/checkout@v2
+<<<<<<< HEAD
 
       # Step 2: Install ArgoCD CLI
       - name: Install ArgoCD CLI
+=======
+        
+      - name: Locate ArgoCD binary
+        run: which argocd
+        
+      # Add the ArgoCD CLI path to the PATH environment variable
+      - name: Add ArgoCD to PATH
+>>>>>>> ac4984874bec2f05e9646e44667570f8cd330703
         run: |
           curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
           chmod +x /usr/local/bin/argocd
