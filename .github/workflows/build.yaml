@@ -43,6 +43,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      # Step 2: Download and Install ArgoCD CLI in Working Directory
+      - name: Install ArgoCD CLI
+        run: |
+          curl -sSL -o ./argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+          chmod +x ./argocd
+          
       #Step 2: ArgoCd Login
       - name: ArgoCD Login and sync
         env:
