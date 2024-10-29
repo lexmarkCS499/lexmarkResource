@@ -42,7 +42,10 @@ jobs:
       # Step 1: Checkout the repository again
       - name: Checkout repository
         uses: actions/checkout@v2
-
+        
+      - name: Locate ArgoCD binary
+        run: which argocd
+        
       # Add the ArgoCD CLI path to the PATH environment variable
       - name: Add ArgoCD to PATH
         run: |
