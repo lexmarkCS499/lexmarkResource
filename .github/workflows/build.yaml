@@ -37,38 +37,38 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    env:
-      ARGOCD_SERVER: http://localhost:8080
-      ARGOCD_AUTH_TOKEN: ${{ secrets.ARGOCD_AUTH_TOKEN }}
-      PATH: $PATH:~/lexmarkResource  # Ensure PATH is updated across steps
-    
+
     steps:
       # Step 1: Checkout the repository again
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Step 2: Verify ArgoCD Installation and PATH Update
-      - name: Add ArgoCD to PATH
-        run: |
-          export PATH=$PATH:~/lexmarkResource
-          argocd version
+    
+      - name: Locate ArgoCD binary
+        run: which argocd
 
-      # Step 3: ArgoCD Login
-      - name: ArgoCD Login
+      # Verify ArgoCD Installation
+      - name: Verify ArgoCD Installation
+        run: argocd version
+
+      #Step 2: ArgoCd Login
+      - name: ArgoCD Login and sync
+        env:
+          ARGOCD_SERVER: http://localhost:8080
+          ARGOCD_AUTH_TOKEN: ${{ secrets.ARGOCD_AUTH_TOKEN }}
         run: |
+          # Set up authentication with environment variables
           export ARGOCD_OPTS="--server $ARGOCD_SERVER --auth-token $ARGOCD_AUTH_TOKEN"
-          argocd account get-user-info || echo "Login Successful"
+          # Optionally, verify the connection
+          argocd account get-user-info
 
-      # Step 4: Sync ArgoCD to deploy the updated image
-      - name: Sync and Wait for ArgoCD Application
+      # Step 2: Sync ArgoCD to deploy the updated image
+      - name: Sync ArgoCD Application
         run: |
           if [ "${{ github.ref_name }}" == "dev" ]; then
             argocd app sync dev-myapp-argo-application --prune
-            argocd app wait dev-myapp-argo-application
           elif [ "${{ github.ref_name }}" == "staging" ]; then
             argocd app sync staging-myapp-argo-application --prune
-            argocd app wait staging-myapp-argo-application
           elif [ "${{ github.ref_name }}" == "prod" ]; then
             argocd app sync prod-myapp-argo-application --prune
-            argocd app wait prod-myapp-argo-application
           fi
