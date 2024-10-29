@@ -55,8 +55,10 @@ jobs:
           ARGOCD_SERVER: https://localhost:8080
           ARGOCD_AUTH_TOKEN: ${{ secrets.ARGOCD_AUTH_TOKEN }}
         run: |
+          # Use the local binary to verify ArgoCD CLI is working
           ./argocd version
-        # Login and verify the connection
+          
+          # Login and verify the connection
           export ARGOCD_OPTS="--server $ARGOCD_SERVER --auth-token $ARGOCD_AUTH_TOKEN"
           ./argocd account get-user-info
           
