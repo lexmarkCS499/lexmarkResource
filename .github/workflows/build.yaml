@@ -48,25 +48,27 @@ jobs:
         run: |
           curl -sSL -o ./argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
           chmod +x ./argocd
-          
-      #Step 2: ArgoCd Login
+
+      #Step 3: ArgoCd Login
       - name: ArgoCD Login and sync
         env:
-          ARGOCD_SERVER: http://127.0.0.1:4040
+          ARGOCD_SERVER: https://localhost:8080
           ARGOCD_AUTH_TOKEN: ${{ secrets.ARGOCD_AUTH_TOKEN }}
         run: |
-          # Set up authentication with environment variables
+          ./argocd version
+        # Login and verify the connection
           export ARGOCD_OPTS="--server $ARGOCD_SERVER --auth-token $ARGOCD_AUTH_TOKEN"
-          # Optionally, verify the connection
-          argocd account get-user-info
+          ./argocd account get-user-info
+          
 
-      # Step 2: Sync ArgoCD to deploy the updated image
+
+      # Step 4: Sync ArgoCD to deploy the updated image
       - name: Sync ArgoCD Application
         run: |
           if [ "${{ github.ref_name }}" == "dev" ]; then
-            argocd app sync dev-myapp-argo-application --prune
+            ./argocd app sync dev-myapp-argo-application --prune
           elif [ "${{ github.ref_name }}" == "staging" ]; then
-            argocd app sync staging-myapp-argo-application --prune
+            ./argocd app sync staging-myapp-argo-application --prune
           elif [ "${{ github.ref_name }}" == "prod" ]; then
-            argocd app sync prod-myapp-argo-application --prune
+            ./argocd app sync prod-myapp-argo-application --prune
           fi
