@@ -40,12 +40,19 @@ jobs:
           sed -i "s|image: lexmarkkubernetes/my-app:.*|image: lexmarkkubernetes/my-app:${{ github.sha }}|g" k8s/base/deployment.yaml
 
       # Step 6: Commit and push the updated manifest
-      - name: Commit and push changes
+      - name: Commit and push changes if any
+        env:
+          GIT_AUTH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git commit -am "Update Docker image to lexmarkkubernetes/my-app:${{ github.ref_name }}"
-          git push
+          git remote set-url origin https://$GIT_AUTH_TOKEN@github.com/lexmarkCS499/lexmarkResource.git
+          if ! git diff --quiet; then
+            git commit -am "Update Docker image to my-repo/my-app:${{ github.ref_name }}"
+            git push
+          else
+            echo "No changes to commit"
+
 
   deploy:
     needs: build
