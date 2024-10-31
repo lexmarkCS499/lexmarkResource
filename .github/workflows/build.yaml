@@ -52,7 +52,7 @@ jobs:
         env:
           ARGOCD_AUTH_TOKEN: ${{ secrets.ARGOCD_AUTH_TOKEN }}
         run: |
-          ARGOCD_SERVER="4d32-2603-6010-3000-2a06-00-2.ngrok-free.app:443"
+          ARGOCD_SERVER="ca60-2603-6010-3000-2a06-00-2.ngrok-free.app"
           export ARGOCD_OPTS="--server $ARGOCD_SERVER --auth-token $ARGOCD_AUTH_TOKEN --grpc-web"
           ./argocd account get-user-info
 
