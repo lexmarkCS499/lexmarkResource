@@ -59,7 +59,7 @@ jobs:
 # Step 3: ArgoCD Login using Local Binary
       - name: ArgoCD Login
         run: | 
-          argocd account get-user-info \
+          ./argocd account get-user-info \
             --server 6646-2603-6010-3000-2a06-00-2.ngrok-free.app:443 \
             --auth-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhcmdvY2QiLCJzdWIiOiJ1c2VyOmFwaUtleSIsIm5iZiI6MTczMDM0NDc1OSwiaWF0IjoxNzMwMzQ0NzU5LCJqdGkiOiJiNjNmZjZiNi0zNGI3LTQxMDgtOTdmMi1lYzFhMjc3YjM5ZTcifQ.CX43IdOriBSaNm_6NJosRz0T2cKRGOuPbfpjiZyfIYE \
             --insecure \
