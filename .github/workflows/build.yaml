@@ -48,6 +48,7 @@ jobs:
           git config --global user.email "kamalghimire121@gmail.com"  # Your GitHub email
           # Use the PAT token directly for authentication
           git remote set-url origin https://${{ secrets.PAT_TOKEN }}@github.com/lexmarkCS499/lexmarkResource.git
+          
           if ! git diff --quiet; then
             git commit -am "Update Docker image to my-repo/my-app:dev"
             git push origin dev
