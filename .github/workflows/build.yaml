@@ -44,8 +44,8 @@ jobs:
         env:
           GIT_AUTH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "Kamal Ghimire"  # Use your GitHub username
+          git config --global user.email "kamalghimire121@gmail.com"  # Use your GitHub email
           git remote set-url origin https://${{ secrets.PAT_TOKEN }}@github.com/lexmarkCS499/lexmarkResource.git
           if ! git diff --quiet; then
             git commit -am "Update Docker image to my-repo/my-app:${{ github.ref_name }}"
