@@ -33,11 +33,11 @@ jobs:
           file: src/Dockerfile  # Specify the path to your Dockerfile
           push: true
           tags: lexmarkkubernetes/my-app:${{ github.sha }}
-          
+
       # Step 5: Update Kubernetes manifest with the new Docker image tag
       - name: Update Kubernetes Manifest
         run: |
-          sed -i "s|image: lexmarkkubernetes/my-app:.*|image: lexmarkkubernetes/my-app:${{ github.ref_name }}|g" k8s/deployment.yaml
+          sed -i "s|image: lexmarkkubernetes/my-app:.*|image: lexmarkkubernetes/my-app:${{ github.sha }}|g" k8s/base/${{github.ref_name}}/deployment.yaml
 
       # Step 6: Commit and push the updated manifest
       - name: Commit and push changes
