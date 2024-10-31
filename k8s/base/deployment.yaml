@@ -13,7 +13,7 @@ spec:
         app: my-app  # Ensure the labels match the selector
     spec:
       containers:
-        - name: my-app
-          image: my-repo/my-app:latest
+        - name: lexmarkkubernetes
+          image: lexmarkkubernetes/my-app:latest
           ports:
             - containerPort: 8080
