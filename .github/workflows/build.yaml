@@ -42,10 +42,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Download and Install ArgoCD CLI in Working Directory
-        run: |
-          curl -sSL -o ./argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
-          chmod +x ./argocd
+      # - name: Download and Install ArgoCD CLI in Working Directory
+      #   run: |
+      #     curl -sSL -o ./argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+      #     chmod +x ./argocd
 
       # Step 3: ArgoCD Login using Local Binary
 #      - name: ArgoCD Login and Sync
@@ -54,19 +54,17 @@ jobs:
 #        run: |
 #          ARGOCD_SERVER="e382-2603-6010-3000-2a06-00-2.ngrok-free.app"
 #          export ARGOCD_OPTS="--server $ARGOCD_SERVER --auth-token $ARGOCD_AUTH_TOKEN --grpc-web"
-#          ./argocd account get-user-info
+#          argocd account get-user-info
+
+# Step 3: ArgoCD Login using Local Binary
       - name: ArgoCD Login
         run: | 
-          ./argocd login e382-2603-6010-3000-2a06-00-2.ngrok-free.app:443 \
-          --auth-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhcmdvY2QiLCJzdWIiOiJhZG1pbjphcGlLZXkiLCJuYmYiOjE3MzAzMzg0MTYsImlhdCI6MTczMDMzODQxNiwianRpIjoiOGRhZWM0OTctNjg5My00N2U0LWJiZjctMTdhNTlhNTc1MDhjIn0.NdTXkRS5w2kfZaYx5OjSP0iDBfzeGNpKidaFW2ak0TI \
-          --insecure --grpc-web
-          
-          ./argocd login 6646-2603-6010-3000-2a06-00-2.ngrok-free.app:443 \
-          --auth-token $A_TOKEN \
+        argocd account get-user-info \
+          --server 6646-2603-6010-3000-2a06-00-2.ngrok-free.app:443 \
+          --auth-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhcmdvY2QiLCJzdWIiOiJ1c2VyOmFwaUtleSIsIm5iZiI6MTczMDM0NDc1OSwiaWF0IjoxNzMwMzQ0NzU5LCJqdGkiOiJiNjNmZjZiNi0zNGI3LTQxMDgtOTdmMi1lYzFhMjc3YjM5ZTcifQ.CX43IdOriBSaNm_6NJosRz0T2cKRGOuPbfpjiZyfIYE \
           --insecure \
           --grpc-web
-          
-          argocd logout e382-2603-6010-3000-2a06-00-2.ngrok-free.app:443 \
+
           
 
       # Step 4: Sync ArgoCD Application using Local Binary
