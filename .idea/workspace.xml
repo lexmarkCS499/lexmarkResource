@@ -7,6 +7,7 @@
     <list default="true" id="2e4b5307-1eae-4045-ae62-9f8bdcb713e2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.github/workflows/build.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s/overlays/dev/kustomization.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/overlays/dev/kustomization.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +18,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="KubernetesApiPersistence">
+    <option name="context" value="lexmarkCluster" />
   </component>
   <component name="KubernetesApiProvider">{
   &quot;contexts&quot;: [
@@ -69,7 +73,7 @@
       <window_info id="Commit_Guest" show_stripe_button="false" />
       <window_info id="Pull Requests" />
       <window_info id="Learn" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.16347271" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.45514706" />
       <window_info id="Commit" order="1" weight="0.25" />
       <window_info id="Structure" order="2" weight="0.25" />
       <window_info anchor="bottom" id="File Transfer" />
@@ -110,7 +114,7 @@
       <workItem from="1728926808561" duration="7533000" />
       <workItem from="1728935225746" duration="67767000" />
       <workItem from="1730217760593" duration="41000" />
-      <workItem from="1730217811060" duration="862000" />
+      <workItem from="1730217811060" duration="1461000" />
     </task>
     <servers />
   </component>

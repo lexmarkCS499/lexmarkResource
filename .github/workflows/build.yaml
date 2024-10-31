@@ -58,9 +58,16 @@ jobs:
       - name: ArgoCD Login
         run: | 
           ./argocd login e382-2603-6010-3000-2a06-00-2.ngrok-free.app:443 \
-          --username admin \ 
-          --password znNBZgX8m3lTthkP \ 
+          --auth-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhcmdvY2QiLCJzdWIiOiJhZG1pbjphcGlLZXkiLCJuYmYiOjE3MzAzMzg0MTYsImlhdCI6MTczMDMzODQxNiwianRpIjoiOGRhZWM0OTctNjg5My00N2U0LWJiZjctMTdhNTlhNTc1MDhjIn0.NdTXkRS5w2kfZaYx5OjSP0iDBfzeGNpKidaFW2ak0TI \
           --insecure --grpc-web
+          
+          ./argocd login 6646-2603-6010-3000-2a06-00-2.ngrok-free.app:443 \
+          --auth-token $A_TOKEN \
+          --insecure \
+          --grpc-web
+          
+          argocd logout e382-2603-6010-3000-2a06-00-2.ngrok-free.app:443 \
+          
 
       # Step 4: Sync ArgoCD Application using Local Binary
       - name: Sync ArgoCD Application
