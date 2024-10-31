@@ -32,7 +32,20 @@ jobs:
           context: .
           file: src/Dockerfile  # Specify the path to your Dockerfile
           push: true
-          tags: lexmarkkubernetes/my-app:${{ github.ref_name }}
+          tags: lexmarkkubernetes/my-app:${{ github.sha }}
+          
+      # Step 5: Update Kubernetes manifest with the new Docker image tag
+      - name: Update Kubernetes Manifest
+        run: |
+          sed -i "s|image: lexmarkkubernetes/my-app:.*|image: lexmarkkubernetes/my-app:${{ github.ref_name }}|g" k8s/deployment.yaml
+
+      # Step 6: Commit and push the updated manifest
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -am "Update Docker image to lexmarkkubernetes/my-app:${{ github.ref_name }}"
+          git push
 
   deploy:
     needs: build
@@ -71,7 +84,7 @@ jobs:
       - name: Sync ArgoCD Application
         run: |
           if [ "${{ github.ref_name }}" == "dev" ]; then
-            ./argocd app sync dev-myapp-argo-application --prune
+            ./argocd app sync dev-myapp --prune
           elif [ "${{ github.ref_name }}" == "staging" ]; then
             ./argocd app sync staging-myapp-argo-application --prune
           elif [ "${{ github.ref_name }}" == "prod" ]; then
