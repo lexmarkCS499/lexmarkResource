@@ -57,7 +57,7 @@ jobs:
 #          ./argocd account get-user-info
       - name: ArgoCD Login
         run: | 
-          ./argocd login e382-2603-6010-3000-2a06-00-2.ngrok-free.app \
+          ./argocd login e382-2603-6010-3000-2a06-00-2.ngrok-free.app:443 \
           --username admin \ 
           --password znNBZgX8m3lTthkP \ 
           --insecure --grpc-web
