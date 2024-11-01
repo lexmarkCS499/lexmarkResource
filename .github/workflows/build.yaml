@@ -10,7 +10,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       # Step 1: Checkout the code from the repository
       - name: Checkout repository
@@ -79,7 +78,7 @@ jobs:
 #          export ARGOCD_OPTS="--server $ARGOCD_SERVER --auth-token $ARGOCD_AUTH_TOKEN --grpc-web"
 #          argocd account get-user-info
 
-# Step 3: ArgoCD Login using Local Binary
+      # Step 3: ArgoCD Login using Local Binary
       - name: ArgoCD Login
         run: | 
           ./argocd account get-user-info \
@@ -88,15 +87,13 @@ jobs:
             --insecure \
             --grpc-web
 
-          
-
       # Step 4: Sync ArgoCD Application using Local Binary
       - name: Sync ArgoCD Application
         run: |
           if [ "${{ github.ref_name }}" == "dev" ]; then
-            ./argocd app sync dev-myapp --prune
+            ./argocd app sync dev-app --prune
           elif [ "${{ github.ref_name }}" == "staging" ]; then
-            ./argocd app sync staging-myapp-argo-application --prune
+            ./argocd app sync staging-app --prune
           elif [ "${{ github.ref_name }}" == "prod" ]; then
-            ./argocd app sync prod-myapp-argo-application --prune
+            ./argocd app sync prod-app --prune
           fi
