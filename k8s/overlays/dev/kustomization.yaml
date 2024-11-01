@@ -4,6 +4,9 @@ namespace: dev
 bases:
   - ../../base
 patches:
-  - deployment.yaml
+  - path: deployment.yaml
+    target:
+      kind: Deployment
+      name: dev-app
 resources:
   - ingress.yaml
