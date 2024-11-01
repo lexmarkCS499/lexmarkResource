@@ -16,9 +16,9 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: dev-my-app  # Ensure this matches the name of your service
+                name: dev-app  # Ensure this matches the name of your service
                 port:
-                  number: 80
+                  number: 8081
 
 
 
