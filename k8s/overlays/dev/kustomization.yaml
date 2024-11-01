@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: dev
 bases:
   - ../../base
-patchesStrategicMerge:
+patches:
   - deployment.yaml
 resources:
   - ingress.yaml
