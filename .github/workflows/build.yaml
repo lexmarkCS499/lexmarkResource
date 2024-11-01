@@ -88,12 +88,24 @@ jobs:
             --grpc-web
 
       # Step 4: Sync ArgoCD Application using Local Binary
+#      - name: Sync ArgoCD Application
+#        run: |
+#          if [ "${{ github.ref_name }}" == "dev" ]; then
+#            ./argocd app sync dev-app --prune
+#          elif [ "${{ github.ref_name }}" == "staging" ]; then
+#            ./argocd app sync staging-app --prune
+#          elif [ "${{ github.ref_name }}" == "prod" ]; then
+#            ./argocd app sync prod-app --prune
+#          fi
+
       - name: Sync ArgoCD Application
+        env:
+         ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}  # Use your server URL stored in secrets
         run: |
-          if [ "${{ github.ref_name }}" == "dev" ]; then
-            ./argocd app sync dev-app --prune
-          elif [ "${{ github.ref_name }}" == "staging" ]; then
-            ./argocd app sync staging-app --prune
-          elif [ "${{ github.ref_name }}" == "prod" ]; then
-            ./argocd app sync prod-app --prune
-          fi
+         if [ "${{ github.ref_name }}" == "dev" ]; then
+          ./argocd app sync dev-app --server 1c88-2603-6010-3000-2a06-00-2.ngrok-free.app:443 --grpc-web --prune
+         elif [ "${{ github.ref_name }}" == "staging" ]; then
+          ./argocd app sync staging-app --server 1c88-2603-6010-3000-2a06-00-2.ngrok-free.app:443 --grpc-web --prune
+         elif [ "${{ github.ref_name }}" == "prod" ]; then
+          ./argocd app sync prod-app --server 1c88-2603-6010-3000-2a06-00-2.ngrok-free.app:443 --grpc-web --prune
+         fi
