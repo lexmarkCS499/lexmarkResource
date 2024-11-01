@@ -83,7 +83,7 @@ jobs:
         run: | 
           ./argocd account get-user-info \
             --server 1c88-2603-6010-3000-2a06-00-2.ngrok-free.app:443 \
-            --auth-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhcmdvY2QiLCJzdWIiOiJ1c2VyOmFwaUtleSIsIm5iZiI6MTczMDM0NDc1OSwiaWF0IjoxNzMwMzQ0NzU5LCJqdGkiOiJiNjNmZjZiNi0zNGI3LTQxMDgtOTdmMi1lYzFhMjc3YjM5ZTcifQ.CX43IdOriBSaNm_6NJosRz0T2cKRGOuPbfpjiZyfIYE \
+            --auth-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhcmdvY2QiLCJzdWIiOiJ1c2VyOmFwaUtleSIsIm5iZiI6MTczMDQyNTk2MCwiaWF0IjoxNzMwNDI1OTYwLCJqdGkiOiIwZWNiZDkzMi0wYzI3LTQ2NDItOTBjOC1jZGE2Yjc1YzAwYzgifQ.uTjictq7cPo7fAJJJPAm5wS9wv-usiVP2jroJyOafDE \
             --insecure \
             --grpc-web
 
@@ -100,7 +100,7 @@ jobs:
 
       - name: Sync ArgoCD Application
         env:
-         ARGOCD_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhcmdvY2QiLCJzdWIiOiJ1c2VyOmFwaUtleSIsIm5iZiI6MTczMDM0NDc1OSwiaWF0IjoxNzMwMzQ0NzU5LCJqdGkiOiJiNjNmZjZiNi0zNGI3LTQxMDgtOTdmMi1lYzFhMjc3YjM5ZTcifQ.CX43IdOriBSaNm_6NJosRz0T2cKRGOuPbfpjiZyfIYE
+         ARGOCD_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhcmdvY2QiLCJzdWIiOiJ1c2VyOmFwaUtleSIsIm5iZiI6MTczMDQyNTk2MCwiaWF0IjoxNzMwNDI1OTYwLCJqdGkiOiIwZWNiZDkzMi0wYzI3LTQ2NDItOTBjOC1jZGE2Yjc1YzAwYzgifQ.uTjictq7cPo7fAJJJPAm5wS9wv-usiVP2jroJyOafDE
          ARGOCD_SERVER: 1c88-2603-6010-3000-2a06-00-2.ngrok-free.app:443  # Use your server URL stored in secrets
         run: |
          if [ "${{ github.ref_name }}" == "dev" ]; then
