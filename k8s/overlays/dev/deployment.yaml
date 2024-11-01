@@ -17,4 +17,4 @@ spec:
         - name: my-app
           image: lexmarkkubernetes/my-app:dev
           ports:
-            - containerPort: 8081
+            - containerPort: 8080
