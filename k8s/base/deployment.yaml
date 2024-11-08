@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: lexmarkkubernetes
-          image: lexmarkkubernetes/my-app:46b75f96c8d5a04a88cab098d68788eb0d3a8709
+          image: lexmarkkubernetes/my-app:dab7c2c6a1e342d1efe46d988c5af5d16d0bf56b
           ports:
             - containerPort: 8080
