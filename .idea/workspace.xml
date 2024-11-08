@@ -5,8 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e4b5307-1eae-4045-ae62-9f8bdcb713e2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/API_Microservice" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UI_Microservice" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/forwardedPorts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/forwardedPorts.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/API_Microservice/.github/workflows/docker-image.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/API_Microservice/.github/workflows/docker-image.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/API_Microservice/manifests/base/deployment.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/API_Microservice/manifests/base/kustomization.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/API_Microservice/manifests/base/service.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/API_Microservice/manifests/overlays/dev/kustomization.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/API_Microservice/manifests/overlays/prod/kustomization.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/API_Microservice/manifests/overlays/staging/kustomization.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI_Microservice/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI_Microservice/client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,7 +26,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/src/UI_Microservice" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
@@ -47,24 +59,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;11&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/kamal/Lexmark&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Perforce&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "dev",
+    "jdk.selected.JAVA_MODULE": "11",
+    "last_opened_file_path": "/home/kamal/Lexmark",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "vcs.Perforce",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
     <layout>
       <window_info id="Space Code Reviews" />
@@ -73,7 +85,7 @@
       <window_info id="Commit_Guest" show_stripe_button="false" />
       <window_info id="Pull Requests" />
       <window_info id="Learn" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2786947" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25539988" />
       <window_info id="Commit" order="1" weight="0.25" />
       <window_info id="Structure" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" />
@@ -84,7 +96,7 @@
       <window_info anchor="bottom" id="Dependency Checker" />
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="Problems View" order="1" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="2" visible="true" weight="0.43101853" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="2" visible="true" weight="0.10353798" />
       <window_info anchor="bottom" id="Services" order="3" />
       <window_info anchor="right" id="Endpoints" />
       <window_info anchor="right" id="Meet New UI" show_stripe_button="false" side_tool="true" />
@@ -116,7 +128,8 @@
       <workItem from="1728935225746" duration="67767000" />
       <workItem from="1730217760593" duration="41000" />
       <workItem from="1730217811060" duration="2060000" />
-      <workItem from="1730423285628" duration="16270000" />
+      <workItem from="1730423285628" duration="17207000" />
+      <workItem from="1730911774066" duration="7325000" />
     </task>
     <servers />
   </component>
