@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e4b5307-1eae-4045-ae62-9f8bdcb713e2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/build.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/API_Microservice" beforeDir="false" afterPath="$PROJECT_DIR$/src/API_Microservice" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/API_Microservice/.github/workflows/docker-image.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/API_Microservice/.github/workflows/docker-image.yml" afterDir="false" />
@@ -23,7 +24,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/src/UI_Microservice" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
@@ -93,7 +94,7 @@
       <window_info anchor="bottom" id="Dependency Checker" />
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="Problems View" order="1" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="2" visible="true" weight="0.2055" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="2" visible="true" weight="0.53550005" />
       <window_info anchor="bottom" id="Services" order="3" />
       <window_info anchor="right" id="Endpoints" />
       <window_info anchor="right" id="Meet New UI" show_stripe_button="false" side_tool="true" />
