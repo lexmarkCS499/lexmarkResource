@@ -101,7 +101,7 @@ jobs:
       - name: Sync ArgoCD Application
         env:
          ARGOCD_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhcmdvY2QiLCJzdWIiOiJhZG1pbjphcGlLZXkiLCJuYmYiOjE3MzEwNzc1NDMsImlhdCI6MTczMTA3NzU0MywianRpIjoiNDUwMGJmZTgtZjM4Yi00NzUzLThiNTItNThjZjhhM2NjMmZkIn0.cRKlH8IuF10m-RkMkzOOlvLf50s6KX2TrJAZX6EYC4w
-         ARGOCD_SERVER: 53b7-2603-6010-3000-2a06-00-2.ngrok-free.app:443  # Use your server URL stored in secrets
+         ARGOCD_SERVER: e882-2603-6010-3000-2a06-00-1.ngrok-free.app   # Use your server URL stored in secrets
         run: |
          if [ "${{ github.ref_name }}" == "dev" ]; then
           ./argocd app sync dev-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web --prune
@@ -110,6 +110,14 @@ jobs:
          elif [ "${{ github.ref_name }}" == "prod" ]; then
           ./argocd app sync prod-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web --prune
          fi
+
+      - name: Canary Deployment with ArgoCD Rollout
+  run: |
+    if [ "${{ github.ref_name }}" == "dev" ]; then
+      ./argocd app sync dev-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web --prune
+      kubectl argo rollouts get rollout my-app -n dev --watch
+    fi
+
           
           
           
