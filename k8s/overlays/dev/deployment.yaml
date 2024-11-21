@@ -1,6 +1,6 @@
 #k8s/overlays/dev/deployment.yaml
 apiVersion: apps/v1
-kind: Deployment
+kind: Rollout
 metadata:
   name: my-app
   namespace: dev
@@ -19,6 +19,10 @@ spec:
           image: lexmarkkubernetes/my-app:dev
           ports:
             - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
   strategy:
     canary:
       steps:
