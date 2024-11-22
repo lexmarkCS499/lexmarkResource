@@ -1,11 +1,11 @@
 #k8s/overlays/dev/deployment.yaml
 apiVersion: apps/v1
-kind: Rollout
+kind: Deployment
 metadata:
   name: my-app
   namespace: dev
 spec:
-  replicas: 4
+  replicas: 2
   selector:
     matchLabels:
       app: my-app
@@ -19,19 +19,3 @@ spec:
           image: lexmarkkubernetes/my-app:dev
           ports:
             - containerPort: 8080
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 8080
-  strategy:
-    canary:
-      steps:
-        - setWeight: 25       # Send 25% of traffic to the new version
-        - pause:              # Pause to verify
-            duration: 2m
-        - setWeight: 50       # Send 50% of traffic
-        - pause:
-            duration: 2m
-        - setWeight: 100      # Complete traffic shift
-      maxSurge: 1
-      maxUnavailable: 0
