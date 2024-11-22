@@ -8,7 +8,7 @@ on:
       - prod
 
 jobs:
-  build-ui-service:
+  build:
     runs-on: ubuntu-latest
     steps:
       # Step 1: Checkout the code from the repository
@@ -23,123 +23,106 @@ jobs:
       - name: Log in to DockerHub
         run: |
           echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-
-      # Step 4: Run linting to catch syntax errors
-      - name: Run linting
-        run: npm run lint
-        working-directory: src/UI_Microservice
-
-      # Step 5: Build and push the Docker image for UI service to DockerHub
-      - name: Build and push UI Docker image
+      # Step 4: Build and push the Docker image to DockerHub
+      - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          context: src/UI_Microservice
-          file: src/UI_Microservice/Dockerfile  # Specify the path to the UI Dockerfile
+          context: .
+          file: src/Dockerfile  # Specify the path to your Dockerfile
           push: true
-          tags: lexmarkkubernetes/ui-service:${{ github.sha }}
+          tags: lexmarkkubernetes/my-app:${{ github.sha }}
 
-  build-api-service:
-    runs-on: ubuntu-latest
-    steps:
-      # Step 1: Checkout the code from the repository
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      # Step 2: Set up Docker Buildx (for multi-platform builds)
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      # Step 3: Log in to DockerHub
-      - name: Log in to DockerHub
+      # Step 5: Update Kubernetes manifest with the new Docker image tag
+      - name: Update Kubernetes Manifest
         run: |
-          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-
-      # Step 4: Run linting to catch syntax errors
-      - name: Run linting
-        run: npm run lint
-        working-directory: src/API_Microservice
-
-      # Step 5: Build and push the Docker image for API service to DockerHub
-      - name: Build and push API Docker image
-        uses: docker/build-push-action@v2
-        with:
-          context: src/API_Microservice
-          file: src/API_Microservice/Dockerfile  # Specify the path to the API Dockerfile
-          push: true
-          tags: lexmarkkubernetes/api-service:${{ github.sha }}
-
-  update-kubernetes-manifests:
-    needs: [build-ui-service, build-api-service]
-    runs-on: ubuntu-latest
-    steps:
-      # Step 1: Checkout the code from the repository
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      # Step 2: Update Kubernetes manifests with the new Docker image tags
-      - name: Update Kubernetes Manifests for UI and API Services
-        run: |
-          sed -i "s|image: lexmarkkubernetes/ui-service:.*|image: lexmarkkubernetes/ui-service:${{ github.sha }}|g" k8s/base/deployment-ui.yaml
-          sed -i "s|image: lexmarkkubernetes/api-service:.*|image: lexmarkkubernetes/api-service:${{ github.sha }}|g" k8s/base/deployment-api.yaml
-
-      # Step 3: Commit and push the updated manifest
+          sed -i "s|image: lexmarkkubernetes/my-app:.*|image: lexmarkkubernetes/my-app:${{ github.sha }}|g" k8s/base/deployment.yaml
+      # Step 6: Commit and push the updated manifest
       - name: Commit and push changes if any
         env:
           GIT_AUTH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
-          git config --global user.name "Kamal Ghimire"
-          git config --global user.email "kamalghimire121@gmail.com"
+          git config --global user.name "Kamal Ghimire"  # Your GitHub username
+          git config --global user.email "kamalghimire121@gmail.com"  # Your GitHub email
+          # Use the PAT token directly for authentication
           git remote set-url origin https://${{ secrets.PAT_TOKEN }}@github.com/lexmarkCS499/lexmarkResource.git
           
           if ! git diff --quiet; then
-            git commit -am "Update Docker image tags for UI and API services"
+            git commit -am "Update Docker image to my-repo/my-app:dev"
             git push origin dev
           else
             echo "No changes to commit"
           fi
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
 
-deploy:
-  needs: update-kubernetes-manifests
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Download and Install ArgoCD CLI in Working Directory
-      run: |
-        curl -sSL -o ./argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
-        chmod +x ./argocd
+      - name: Download and Install ArgoCD CLI in Working Directory
+        run: |
+          curl -sSL -o ./argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+          chmod +x ./argocd
+      # Step 3: ArgoCD Login using Local Binary
+      #      - name: ArgoCD Login and Sync
+      #        env:
+      #          ARGOCD_AUTH_TOKEN: ${{ secrets.ARGOCD_AUTH_TOKEN }}
+      #        run: |
+      #          ARGOCD_SERVER="e382-2603-6010-3000-2a06-00-2.ngrok-free.app"
+      #          export ARGOCD_OPTS="--server $ARGOCD_SERVER --auth-token $ARGOCD_AUTH_TOKEN --grpc-web"
+      #          argocd account get-user-info
 
-    - name: Sync ArgoCD Application
-      env:
-        ARGOCD_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhcmdvY2QiLCJzdWIiOiJhZG1pbjphcGlLZXkiLCJuYmYiOjE3MzEwNzc1NDMsImlhdCI6MTczMTA3NzU0MywianRpIjoiNDUwMGJmZTgtZjM4Yi00NzUzLThiNTItNThjZjhhM2NjMmZkIn0.cRKlH8IuF10m-RkMkzOOlvLf50s6KX2TrJAZX6EYC4w
-        ARGOCD_SERVER: e882-2603-6010-3000-2a06-00-1.ngrok-free.app
-      run: |
-        if [ "${{ github.ref_name }}" == "dev" ]; then
-         ./argocd app sync dev-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web --prune
-        elif [ "${{ github.ref_name }}" == "staging" ]; then
-         ./argocd app sync staging-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web --prune
-        elif [ "${{ github.ref_name }}" == "prod" ]; then
-         ./argocd app sync prod-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web --prune
-        fi
+      # Step 3: ArgoCD Login using Local Binary
+      #      - name: ArgoCD Login
+      #        run: |
+      #          ./argocd account get-user-info \
+      #            --server 6beb-2603-6010-3000-2a06-00-2.ngrok-free.app:443 \
+      #            --auth-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhcmdvY2QiLCJzdWIiOiJhZG1pbjphcGlLZXkiLCJuYmYiOjE3MzA0Mjg4ODgsImlhdCI6MTczMDQyODg4OCwianRpIjoiNGI1MDFiYzMtNWYyNi00Mzk4LWE4NmItNThhZGFhMTk3NDlmIn0.loQvAsiXo2DjfEncl169-llCBNQfne5Sf1kHWc2yZFI \
+      #            --insecure \
+      #            --grpc-web
 
-      continue-on-error: true
+      # Step 4: Sync ArgoCD Application using Local Binary
+      #      - name: Sync ArgoCD Application
+      #        run: |
+      #          if [ "${{ github.ref_name }}" == "dev" ]; then
+      #            ./argocd app sync dev-app --prune
+      #          elif [ "${{ github.ref_name }}" == "staging" ]; then
+      #            ./argocd app sync staging-app --prune
+      #          elif [ "${{ github.ref_name }}" == "prod" ]; then
+      #            ./argocd app sync prod-app --prune
+      #          fi
+      #argocd app sync dev-app --server 6beb-2603-6010-3000-2a06-00-2.ngrok-free.app:443 --auth-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhcmdvY2QiLCJzdWIiOiJhZG1pbjphcGlLZXkiLCJuYmYiOjE3MzA0Mjg4ODgsImlhdCI6MTczMDQyODg4OCwianRpIjoiNGI1MDFiYzMtNWYyNi00Mzk4LWE4NmItNThhZGFhMTk3NDlmIn0.loQvAsiXo2DjfEncl169-llCBNQfne5Sf1kHWc2yZFI --grpc-web
+      - name: Sync ArgoCD Application
+        env:
+          ARGOCD_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhcmdvY2QiLCJzdWIiOiJhZG1pbjphcGlLZXkiLCJuYmYiOjE3MzEwNzc1NDMsImlhdCI6MTczMTA3NzU0MywianRpIjoiNDUwMGJmZTgtZjM4Yi00NzUzLThiNTItNThjZjhhM2NjMmZkIn0.cRKlH8IuF10m-RkMkzOOlvLf50s6KX2TrJAZX6EYC4w
+          ARGOCD_SERVER: e882-2603-6010-3000-2a06-00-1.ngrok-free.app   # Use your server URL stored in secrets
+        run: |
+          if [ "${{ github.ref_name }}" == "dev" ]; then
+           ./argocd app sync dev-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web --prune
+          elif [ "${{ github.ref_name }}" == "staging" ]; then
+           ./argocd app sync staging-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web --prune
+          elif [ "${{ github.ref_name }}" == "prod" ]; then
+           ./argocd app sync prod-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web --prune
+          fi
+        continue-on-error: true  # Allow capturing any error during sync to proceed with rollback
 
-    - name: Get Previous Revision
-      if: failure()
-      env:
-        ARGOCD_TOKEN: ${{ secrets.ARGOCD_TOKEN }}
-        ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
-      run: |
-        ./argocd app history dev-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web > app-history.txt
-        PREVIOUS_REVISION=$(awk 'NR==2 {print $1}' app-history.txt)
-        echo "PREVIOUS_REVISION=$PREVIOUS_REVISION" >> $GITHUB_ENV
-
-    - name: Rollback to Previous Version if Sync Fails
-      if: failure()
-      env:
-        ARGOCD_TOKEN: ${{ secrets.ARGOCD_TOKEN }}
-        ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
-      run: |
-        echo "Rolling back to previous stable version"
-        ./argocd app rollback dev-app --revision ${{ env.PREVIOUS_REVISION }} --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web
+        # Step 4: Get Previous Revision
+      - name: Get Previous Revision
+        if: failure()  # Execute this step only if the previous step failed
+        env:
+          ARGOCD_TOKEN: ${{ secrets.ARGOCD_TOKEN }}
+          ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
+        run: |
+          ./argocd app history dev-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web > app-history.txt
+          PREVIOUS_REVISION=$(awk 'NR==2 {print $1}' app-history.txt)
+          echo "PREVIOUS_REVISION=$PREVIOUS_REVISION" >> $GITHUB_ENV
+      # Step 5: Rollback on failure
+      - name: Rollback to Previous Version if Sync Fails
+        if: failure()  # Execute rollback if the sync step fails
+        env:
+          ARGOCD_TOKEN: ${{ secrets.ARGOCD_TOKEN }}
+          ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
+        run: |
+          echo "Rolling back to previous stable version"
+          ./argocd app rollback dev-app --revision ${{ env.PREVIOUS_REVISION }} --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web
