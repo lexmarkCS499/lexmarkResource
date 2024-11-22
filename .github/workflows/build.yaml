@@ -111,35 +111,28 @@ jobs:
           ./argocd app sync prod-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web --prune
          fi
 
-      - name: Canary Deployment with ArgoCD Rollout
-  run: |
-    if [ "${{ github.ref_name }}" == "dev" ]; then
-      ./argocd app sync dev-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web --prune
-      kubectl argo rollouts get rollout my-app -n dev --watch
-    fi
-
-  continue-on-error: true  # Allow capturing any error during sync to proceed with rollback
+        continue-on-error: true  # Allow capturing any error during sync to proceed with rollback
     
-    # Step 4: Get Previous Revision
-    - name: Get Previous Revision
-      if: failure()  # Execute this step only if the previous step failed
-      env:
-        ARGOCD_TOKEN: ${{ secrets.ARGOCD_TOKEN }}
-        ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
-      run: |
-        ./argocd app history dev-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web > app-history.txt
-        PREVIOUS_REVISION=$(awk 'NR==2 {print $1}' app-history.txt)
-        echo "PREVIOUS_REVISION=$PREVIOUS_REVISION" >> $GITHUB_ENV
+          # Step 4: Get Previous Revision
+      - name: Get Previous Revision
+        if: failure()  # Execute this step only if the previous step failed
+        env:
+          ARGOCD_TOKEN: ${{ secrets.ARGOCD_TOKEN }}
+          ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
+        run: |
+          ./argocd app history dev-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web > app-history.txt
+          PREVIOUS_REVISION=$(awk 'NR==2 {print $1}' app-history.txt)
+          echo "PREVIOUS_REVISION=$PREVIOUS_REVISION" >> $GITHUB_ENV
 
     # Step 5: Rollback on failure
-    - name: Rollback to Previous Version if Sync Fails
-      if: failure()  # Execute rollback if the sync step fails
-      env:
-        ARGOCD_TOKEN: ${{ secrets.ARGOCD_TOKEN }}
-        ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
-      run: |
-        echo "Rolling back to previous stable version"
-        ./argocd app rollback dev-app --revision ${{ env.PREVIOUS_REVISION }} --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web
+      - name: Rollback to Previous Version if Sync Fails
+        if: failure()  # Execute rollback if the sync step fails
+        env:
+          ARGOCD_TOKEN: ${{ secrets.ARGOCD_TOKEN }}
+          ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
+        run: |
+          echo "Rolling back to previous stable version"
+          ./argocd app rollback dev-app --revision ${{ env.PREVIOUS_REVISION }} --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web
 
           
           
