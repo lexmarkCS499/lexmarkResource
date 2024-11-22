@@ -88,48 +88,48 @@ jobs:
             echo "No changes to commit"
           fi
 
-deploy:
-  needs: update-kubernetes-manifests
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+  deploy:
+    needs: update-kubernetes-manifests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Download and Install ArgoCD CLI in Working Directory
-      run: |
-        curl -sSL -o ./argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
-        chmod +x ./argocd
+      - name: Download and Install ArgoCD CLI in Working Directory
+        run: |
+          curl -sSL -o ./argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+          chmod +x ./argocd
 
-    - name: Sync ArgoCD Application
-      env:
-        ARGOCD_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhcmdvY2QiLCJzdWIiOiJhZG1pbjphcGlLZXkiLCJuYmYiOjE3MzEwNzc1NDMsImlhdCI6MTczMTA3NzU0MywianRpIjoiNDUwMGJmZTgtZjM4Yi00NzUzLThiNTItNThjZjhhM2NjMmZkIn0.cRKlH8IuF10m-RkMkzOOlvLf50s6KX2TrJAZX6EYC4w
-        ARGOCD_SERVER: e882-2603-6010-3000-2a06-00-1.ngrok-free.app
-      run: |
-        if [ "${{ github.ref_name }}" == "dev" ]; then
-         ./argocd app sync dev-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web --prune
-        elif [ "${{ github.ref_name }}" == "staging" ]; then
-         ./argocd app sync staging-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web --prune
-        elif [ "${{ github.ref_name }}" == "prod" ]; then
-         ./argocd app sync prod-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web --prune
-        fi
+      - name: Sync ArgoCD Application
+        env:
+          ARGOCD_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhcmdvY2QiLCJzdWIiOiJhZG1pbjphcGlLZXkiLCJuYmYiOjE3MzEwNzc1NDMsImlhdCI6MTczMTA3NzU0MywianRpIjoiNDUwMGJmZTgtZjM4Yi00NzUzLThiNTItNThjZjhhM2NjMmZkIn0.cRKlH8IuF10m-RkMkzOOlvLf50s6KX2TrJAZX6EYC4w
+          ARGOCD_SERVER: e882-2603-6010-3000-2a06-00-1.ngrok-free.app
+        run: |
+          if [ "${{ github.ref_name }}" == "dev" ]; then
+          ./argocd app sync dev-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web --prune
+          elif [ "${{ github.ref_name }}" == "staging" ]; then
+          ./argocd app sync staging-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web --prune
+          elif [ "${{ github.ref_name }}" == "prod" ]; then
+          ./argocd app sync prod-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web --prune
+          fi
 
-      continue-on-error: true
+        continue-on-error: true
 
-    - name: Get Previous Revision
-      if: failure()
-      env:
-        ARGOCD_TOKEN: ${{ secrets.ARGOCD_TOKEN }}
-        ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
-      run: |
-        ./argocd app history dev-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web > app-history.txt
-        PREVIOUS_REVISION=$(awk 'NR==2 {print $1}' app-history.txt)
-        echo "PREVIOUS_REVISION=$PREVIOUS_REVISION" >> $GITHUB_ENV
+      - name: Get Previous Revision
+        if: failure()
+        env:
+          ARGOCD_TOKEN: ${{ secrets.ARGOCD_TOKEN }}
+          ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
+        run: |
+          ./argocd app history dev-app --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web > app-history.txt
+          PREVIOUS_REVISION=$(awk 'NR==2 {print $1}' app-history.txt)
+          echo "PREVIOUS_REVISION=$PREVIOUS_REVISION" >> $GITHUB_ENV
 
-    - name: Rollback to Previous Version if Sync Fails
-      if: failure()
-      env:
-        ARGOCD_TOKEN: ${{ secrets.ARGOCD_TOKEN }}
-        ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
-      run: |
-        echo "Rolling back to previous stable version"
-        ./argocd app rollback dev-app --revision ${{ env.PREVIOUS_REVISION }} --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web
+      - name: Rollback to Previous Version if Sync Fails
+        if: failure()
+        env:
+          ARGOCD_TOKEN: ${{ secrets.ARGOCD_TOKEN }}
+          ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
+        run: |
+          echo "Rolling back to previous stable version"
+          ./argocd app rollback dev-app --revision ${{ env.PREVIOUS_REVISION }} --server $ARGOCD_SERVER --auth-token $ARGOCD_TOKEN --grpc-web
