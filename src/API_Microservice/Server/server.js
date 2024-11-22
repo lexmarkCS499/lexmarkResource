@@ -14,7 +14,7 @@ mongoose.connect('mongodb://mongo-db:27017/names', { // Change to your database 
 });
 
 // Define the Item schema
-const ItemSchema new mongoose.Schema({
+const ItemSchema = new mongoose.Schema({
     name: String,
     quantity: { type: Number, default: 1 }, // Set default quantity to 1
 });
