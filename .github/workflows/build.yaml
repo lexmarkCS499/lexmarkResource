@@ -56,8 +56,8 @@ jobs:
           fi
 
 
-  deploy:
-    needs: build
+deploy:
+          needs: build
     runs-on: ubuntu-latest
 
     steps:
